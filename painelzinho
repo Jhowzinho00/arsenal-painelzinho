@@ -1,0 +1,89 @@
+-- Interface Visual
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local TextLabel = Instance.new("TextLabel")
+local ActivateBtn = Instance.new("TextButton")
+local UICorner = Instance.new("UICorner")
+
+-- Setup da Janela
+ScreenGui.Parent = game.CoreGui
+Frame.Parent = ScreenGui
+Frame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+Frame.Position = UDim2.new(0.5, -110, 0.5, -60)
+Frame.Size = UDim2.new(0, 220, 0, 120)
+Frame.Active = true
+Frame.Draggable = true
+
+TextLabel.Parent = Frame
+TextLabel.Size = UDim2.new(1, 0, 0, 40)
+TextLabel.Text = "ARSENAL VIP EXPLOIT"
+TextLabel.TextColor3 = Color3.fromRGB(0, 255, 0)
+TextLabel.Font = Enum.Font.GothamBold
+TextLabel.TextSize = 14
+
+ActivateBtn.Parent = Frame
+ActivateBtn.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+ActivateBtn.Position = UDim2.new(0.1, 0, 0.45, 0)
+ActivateBtn.Size = UDim2.new(0.8, 0, 0.35, 0)
+ActivateBtn.Text = "ATIVE O SCRIPT AQUI"
+ActivateBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+ActivateBtn.Font = Enum.Font.SourceSansBold
+ActivateBtn.TextSize = 15
+
+local corner = Instance.new("UICorner")
+corner.Parent = ActivateBtn
+
+-- Função para Tremer a Câmera
+local function shakeCamera(duration, intensity)
+    local camera = game.Workspace.CurrentCamera
+    local startTime = tick()
+    
+    spawn(function()
+        while tick() - startTime < duration do
+            local x = math.random(-intensity, intensity) / 100
+            local y = math.random(-intensity, intensity) / 100
+            local z = math.random(-intensity, intensity) / 100
+            camera.CFrame = camera.CFrame * CFrame.Angles(x, y, z)
+            task.wait(0.01)
+        end
+    end)
+end
+
+-- Ação da Trollagem
+ActivateBtn.MouseButton1Click:Connect(function()
+    ActivateBtn.Text = "INJETANDO EXPLOIT..."
+    task.wait(2)
+    
+    -- 1. Sons Estourados (Sobrepostos para distorcer)
+    local s1 = Instance.new("Sound", game.Workspace)
+    s1.SoundId = "rbxassetid://12222084"
+    s1.Volume = 10
+    s1.PlaybackSpeed = 0.5
+    s1:Play()
+    
+    local s2 = Instance.new("Sound", game.Workspace)
+    s2.SoundId = "rbxassetid://12222124"
+    s2.Volume = 10
+    s2:Play()
+
+    -- 2. Iniciar Tremor de Câmera (Duração 4s, Intensidade 15)
+    shakeCamera(4, 15)
+    
+    -- 3. Efeito Visual de Flashbang
+    local flash = Instance.new("ColorCorrectionEffect", game.Lighting)
+    flash.Brightness = 5
+    flash.Contrast = 5
+    
+    TextLabel.Text = "KKKKKK TROLLADO!"
+    TextLabel.TextColor3 = Color3.fromRGB(255, 0, 0)
+    ActivateBtn.Text = "SURDO E TREMENDO!"
+    ActivateBtn.BackgroundColor3 = Color3.fromRGB(150, 0, 0)
+    
+    task.wait(0.3)
+    flash:Destroy() -- Remove o flash rápido para o susto ser maior
+    
+    -- Limpeza dos sons
+    task.wait(4)
+    s1:Destroy()
+    s2:Destroy()
+end)****
